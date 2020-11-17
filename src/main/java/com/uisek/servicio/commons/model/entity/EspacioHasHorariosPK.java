@@ -17,7 +17,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EspacioHasHorariosPK implements Serializable {
 
-    @Basic(optional = false)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Basic(optional = false)
     @Column(name = "espacio_idespacio")
     private int espacioIdespacio;
     @Basic(optional = false)

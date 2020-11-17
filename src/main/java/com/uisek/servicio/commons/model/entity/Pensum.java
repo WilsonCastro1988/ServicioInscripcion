@@ -25,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  *
  * @author Wilson
@@ -67,6 +69,7 @@ public class Pensum implements Serializable {
     @Column(name = "activo_pensum")
     private Short activoPensum;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pensumIdpensum", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Materias> materiasList;
 
     public Pensum() {

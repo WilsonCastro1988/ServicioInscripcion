@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  *
  * @author Wilson
@@ -50,6 +52,7 @@ public class Paralelo implements Serializable {
     @Column(name = "cupo_paralelo")
     private Integer cupoParalelo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paraleloIdparalelo", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Materias> materiasList;
 
     public Paralelo() {

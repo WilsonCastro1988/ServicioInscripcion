@@ -8,14 +8,13 @@ package com.uisek.servicio.commons.model.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -67,9 +66,10 @@ public class Estudiantes implements Serializable {
     private Short activoEstudiantes;
     @Column(name = "flag_carrera_estudiantes")
     private Integer flagCarreraEstudiantes;
-    @JoinColumn(name = "matricula_idmatricula", referencedColumnName = "idmatricula")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Matricula matriculaIdmatricula;
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudianteIdestudiante", fetch = FetchType.LAZY)
+    private List<Matricula> matriculaList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantes", fetch = FetchType.LAZY)
     private List<MateriasHasEstudiantes> materiasHasEstudiantesList;
 
@@ -152,15 +152,17 @@ public class Estudiantes implements Serializable {
         this.flagCarreraEstudiantes = flagCarreraEstudiantes;
     }
 
-    public Matricula getMatriculaIdmatricula() {
-        return matriculaIdmatricula;
-    }
+   
 
-    public void setMatriculaIdmatricula(Matricula matriculaIdmatricula) {
-        this.matriculaIdmatricula = matriculaIdmatricula;
-    }
+    public List<Matricula> getMatriculaList() {
+		return matriculaList;
+	}
 
-    @XmlTransient
+	public void setMatriculaList(List<Matricula> matriculaList) {
+		this.matriculaList = matriculaList;
+	}
+
+	@XmlTransient
     public List<MateriasHasEstudiantes> getMateriasHasEstudiantesList() {
         return materiasHasEstudiantesList;
     }

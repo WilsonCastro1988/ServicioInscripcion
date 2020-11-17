@@ -22,6 +22,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Wilson
@@ -46,7 +49,8 @@ public class TipoEspacio implements Serializable {
     private String nombreTipoEspacio;
     @Column(name = "activo_tipo_espacio")
     private Short activoTipoEspacio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoEspacioIdtipoEspacio", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoEspacioIdtipoEspacio")
+    @JsonBackReference
     private List<Espacio> espacioList;
 
     public TipoEspacio() {

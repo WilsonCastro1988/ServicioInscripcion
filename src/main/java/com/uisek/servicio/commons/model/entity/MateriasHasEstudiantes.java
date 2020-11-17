@@ -17,6 +17,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Wilson
@@ -38,9 +40,11 @@ public class MateriasHasEstudiantes implements Serializable {
     private Short activoMateriasHasEstudiantes;
     @JoinColumn(name = "estudiantes_idestudiantes", referencedColumnName = "idestudiantes", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Estudiantes estudiantes;
     @JoinColumn(name = "materias_idmaterias", referencedColumnName = "idmaterias", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Materias materias;
 
     public MateriasHasEstudiantes() {

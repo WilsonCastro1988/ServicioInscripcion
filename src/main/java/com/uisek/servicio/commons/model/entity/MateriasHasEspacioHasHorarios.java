@@ -6,6 +6,7 @@
 package com.uisek.servicio.commons.model.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,6 +18,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -41,10 +45,12 @@ public class MateriasHasEspacioHasHorarios implements Serializable {
     @JoinColumns({
         @JoinColumn(name = "espacio_has_horarios_espacio_idespacio", referencedColumnName = "espacio_idespacio", insertable = false, updatable = false)
         , @JoinColumn(name = "espacio_has_horarios_horarios_idhorarios", referencedColumnName = "horarios_idhorarios", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
+    @JsonIgnore
     private EspacioHasHorarios espacioHasHorarios;
     @JoinColumn(name = "materias_idmaterias", referencedColumnName = "idmaterias", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
+    @JsonIgnore
     private Materias materias;
 
     public MateriasHasEspacioHasHorarios() {

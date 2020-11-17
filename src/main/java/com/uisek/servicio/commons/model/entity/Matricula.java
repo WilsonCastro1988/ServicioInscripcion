@@ -7,8 +7,8 @@ package com.uisek.servicio.commons.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,10 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  *
@@ -51,8 +52,14 @@ public class Matricula implements Serializable {
     private String numeroMatricula;
     @Column(name = "activo_matricula")
     private Short activoMatricula;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matriculaIdmatricula", fetch = FetchType.LAZY)
-    private List<Estudiantes> estudiantesList;
+    
+    @JoinColumn(name = "estudiante_idestudiante", referencedColumnName = "idestudiantes")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Estudiantes estudianteIdestudiante;
+    
+    
+    
     @JoinColumn(name = "estado_matricula_idestado_matricula", referencedColumnName = "idestado_matricula")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadoMatricula estadoMatriculaIdestadoMatricula;
@@ -96,16 +103,17 @@ public class Matricula implements Serializable {
         this.activoMatricula = activoMatricula;
     }
 
-    @XmlTransient
-    public List<Estudiantes> getEstudiantesList() {
-        return estudiantesList;
-    }
+   
 
-    public void setEstudiantesList(List<Estudiantes> estudiantesList) {
-        this.estudiantesList = estudiantesList;
-    }
+    public Estudiantes getEstudianteIdestudiante() {
+		return estudianteIdestudiante;
+	}
 
-    public EstadoMatricula getEstadoMatriculaIdestadoMatricula() {
+	public void setEstudianteIdestudiante(Estudiantes estudianteIdestudiante) {
+		this.estudianteIdestudiante = estudianteIdestudiante;
+	}
+
+	public EstadoMatricula getEstadoMatriculaIdestadoMatricula() {
         return estadoMatriculaIdestadoMatricula;
     }
 

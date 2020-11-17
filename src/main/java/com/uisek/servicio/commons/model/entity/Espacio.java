@@ -49,15 +49,15 @@ public class Espacio implements Serializable {
     @Column(name = "nombre_espacio")
     private String nombreEspacio;
     @Column(name = "descripcion_espacio")
-    private Short descripcionEspacio;
+    private String descripcionEspacio;
     @Column(name = "activo_espacio")
     private Short activoEspacio;
     @Column(name = "capacidad_espacio")
     private Integer capacidadEspacio;
     @JoinColumn(name = "tipo_espacio_idtipo_espacio", referencedColumnName = "idtipo_espacio")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private TipoEspacio tipoEspacioIdtipoEspacio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "espacio", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "espacio")
     private List<EspacioHasHorarios> espacioHasHorariosList;
 
     public Espacio() {
@@ -83,11 +83,11 @@ public class Espacio implements Serializable {
         this.nombreEspacio = nombreEspacio;
     }
 
-    public Short getDescripcionEspacio() {
+    public String getDescripcionEspacio() {
         return descripcionEspacio;
     }
 
-    public void setDescripcionEspacio(Short descripcionEspacio) {
+    public void setDescripcionEspacio(String descripcionEspacio) {
         this.descripcionEspacio = descripcionEspacio;
     }
 

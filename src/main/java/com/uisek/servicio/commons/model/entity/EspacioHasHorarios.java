@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Wilson
@@ -44,9 +46,11 @@ public class EspacioHasHorarios implements Serializable {
     private List<MateriasHasEspacioHasHorarios> materiasHasEspacioHasHorariosList;
     @JoinColumn(name = "espacio_idespacio", referencedColumnName = "idespacio", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Espacio espacio;
     @JoinColumn(name = "horarios_idhorarios", referencedColumnName = "idhorarios", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Horarios horarios;
 
     public EspacioHasHorarios() {

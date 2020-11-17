@@ -24,6 +24,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Wilson
@@ -46,20 +49,22 @@ public class Materias implements Serializable {
     private Integer idmaterias;
     @Column(name = "nombre_materia")
     private String nombreMateria;
+    @Column(name = "dias_materia")
+    private String diasMateria;
     @Column(name = "activo_materias")
     private Short activoMaterias;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materias", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materias")
     private List<MateriasHasEspacioHasHorarios> materiasHasEspacioHasHorariosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materias", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materias")
     private List<MateriasHasEstudiantes> materiasHasEstudiantesList;
     @JoinColumn(name = "carrera_idcarrera", referencedColumnName = "idcarrera")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Carrera carreraIdcarrera;
     @JoinColumn(name = "paralelo_idparalelo", referencedColumnName = "idparalelo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Paralelo paraleloIdparalelo;
     @JoinColumn(name = "pensum_idpensum", referencedColumnName = "idpensum")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pensum pensumIdpensum;
 
     public Materias() {
@@ -68,8 +73,18 @@ public class Materias implements Serializable {
     public Materias(Integer idmaterias) {
         this.idmaterias = idmaterias;
     }
+    
+    
 
-    public Integer getIdmaterias() {
+    public String getDiasMateria() {
+		return diasMateria;
+	}
+
+	public void setDiasMateria(String diasMateria) {
+		this.diasMateria = diasMateria;
+	}
+
+	public Integer getIdmaterias() {
         return idmaterias;
     }
 

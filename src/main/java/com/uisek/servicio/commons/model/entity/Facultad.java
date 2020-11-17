@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  *
  * @author Wilson
@@ -49,7 +51,7 @@ public class Facultad implements Serializable {
     private String descripcionFacultad;
     @Column(name = "activo_facultad")
     private String activoFacultad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultadIdfacultad", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultadIdfacultad")
     private List<Carrera> carreraList;
 
     public Facultad() {
